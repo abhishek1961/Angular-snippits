@@ -1,0 +1,27 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div >
+  <h1  style="text-align:center">
+    Welcome to {{ title }}!
+  </h1>
+  </div>
+
+  <div >
+ <form #useform="ngForm" [ngStyle]="style" >
+
+    <div class="form-group">
+        <label for="name">To Number</label>
+   <input type="tel"  class="form-control" name="number" placeholder="To number" #num="ngModel" required  pattern="^\d{10}$" [class.is-invalid]="num.invalid && num.touched" [(ngModel)]=obj.phone  >
+<small class="text-danger" [class.d-none]="num.valid || num.untouched">number must be of 10 digits</small><br>
+    </div>
+
+    <div class="form-group">
+        <label for="name">Message</label>
+   <textarea rows="4" cols="50"  class="form-control" name="smsarea" placeholder="write your voice message here!!" required #msg="ngModel"  [class.is-invalid]="msg.invalid && msg.touched" [(ngModel)]=obj.message ></textarea>
+  <small class="text-danger" [class.d-none]="msg.valid || msg.untouched">can not send blank message</small>
+    </div>
+
+   <button class="btn btn-primary" [disabled]="useform.form.invalid" type="submit" (click)="onsubmit()">Submit </button>
+  
+ </form>
+
+  </div>

@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <h2 style="color:black">Bootcamp Enrollment Form</h2>
+  
+  <div class="form-group" [ngStyle]="style2">
+  <input type="text" class="form-control" name="name1" required #name1="ngModel" [class.is-invalid]="name1.invalid && name1.touched" [(ngModel)]="getname" [ngStyle]="style">
+  <small class="text-danger" [class.d-none]="name1.valid ||name1.untouched">Name Is Invalid</small><br> 
+  <button class="btn btn-primary"  [disabled]="name1.invalid && name1.touched" (click)="getprocess()">GET</button><br>
+  </div>
+  
+  <form #useform="ngForm" [ngStyle]="style">
+
+      <div hidden class="form-group" [ngStyle]="style2"> 
+    <button class="btn btn-primary" (click)="click(useform)">click me</button><br>
+    
+    {{useform.value | json}}
+   <hr />
+    {{userModel | json}}
+    <hr />
+    {{address1.className}}
+    </div>
+
+    <hr />
+    <hr />
+    <div class="form-group" [ngStyle]="style2"> 
+     <div ngModelGroup="address">
+        <label>Address Line 1</label>
+     <input type="text" class="form-control" required #address1 name="addressLine1" [(ngModel)]="userModel.addressLine1" [ngStyle]="style" >
+    <br>
+     <label >Address Line 2</label>
+     <input type="text" class="form-control" required  name="addressLine2" [(ngModel)]="userModel.addressLine2" [ngStyle]="style">
+
+     </div>
+
+     <br>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" required #name="ngModel" [class.is-invalid]="name.invalid && name.touched" [(ngModel)]=userModel.name [ngStyle]="style">
+      <small class="text-danger" [class.d-none]="name.valid ||name.untouched">Name Is Invalid</small>  
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="mail" class="form-control" name="email" required #email="ngModel" [class.is-invalid]="email.invalid && email.touched"  [(ngModel)]=userModel.email [ngStyle]="style">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Phone</label>
+      <input type="tel" class="form-control" name="number" required #phone="ngModel" pattern="^\d{10}$" [class.is-invalid]="phone.invalid && phone.touched" [(ngModel)]=userModel.Phone [ngStyle]="style">
+      <small class="text-danger" [class.d-none]="phone.valid ||phone.untouched">number must be of 10 digits</small>  
+ 
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Select Topic</label>
+      <select class="custom-select" name="topic" required [(ngModel)]=userModel.topics [ngStyle]="style">
+        <option value=" ">I am interested in</option>
+        <option *ngFor="let topic of topics">{{ topic }}</option>
+      </select>
+    </div>
+    <br>
+    <div class="mb-3">
+      <label>Time preference</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="timePreference" value="morning" [(ngModel)]=userModel.timepreference>
+        <label class="form-check-label">Morning (9AM - 12PM)</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="timePreference" value="evening" [(ngModel)]=userModel.timepreference >
+        <label class="form-check-label">Evening (5PM - 8PM)</label>
+      </div>
+    </div>
+    <br>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" name="subscribe" [(ngModel)]=userModel.subscribe >
+      <label class="form-check-label">
+        Send me promotional offers
+      </label>
+    </div>
+    <br>
+    <button class="btn btn-primary" [disabled]="useform.form.invalid" type="submit" (click)="onsubmit()">Submit form</button>
+  </div>
+  </form>
+    
+  </div>
